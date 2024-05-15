@@ -14,7 +14,7 @@ namespace pizzeriaproject.Migrations
                 name: "Pizzerias",
                 columns: table => new
                 {
-                    PizzeriaId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -22,14 +22,14 @@ namespace pizzeriaproject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pizzerias", x => x.PizzeriaId);
+                    table.PrimaryKey("PK_Pizzerias", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pizzas",
                 columns: table => new
                 {
-                    PizzaId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -39,12 +39,12 @@ namespace pizzeriaproject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pizzas", x => x.PizzaId);
+                    table.PrimaryKey("PK_Pizzas", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Pizzas_Pizzerias_PizzeriaId",
                         column: x => x.PizzeriaId,
                         principalTable: "Pizzerias",
-                        principalColumn: "PizzeriaId");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

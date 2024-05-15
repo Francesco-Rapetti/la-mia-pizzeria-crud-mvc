@@ -12,7 +12,7 @@ using pizzeria_project;
 namespace pizzeriaproject.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240515143258_InitialCreate")]
+    [Migration("20240515145631_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace pizzeriaproject.Migrations
 
             modelBuilder.Entity("pizzeria_project.Models.Pizza", b =>
                 {
-                    b.Property<int>("PizzaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PizzaId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -51,7 +51,7 @@ namespace pizzeriaproject.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.HasKey("PizzaId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PizzeriaId");
 
@@ -60,11 +60,11 @@ namespace pizzeriaproject.Migrations
 
             modelBuilder.Entity("pizzeria_project.Models.Pizzeria", b =>
                 {
-                    b.Property<int>("PizzeriaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PizzeriaId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -78,7 +78,7 @@ namespace pizzeriaproject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PizzeriaId");
+                    b.HasKey("Id");
 
                     b.ToTable("Pizzerias");
                 });
