@@ -11,7 +11,7 @@ using pizzeria_project;
 
 namespace pizzeriaproject.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(PizzaContext))]
     [Migration("20240515145631_InitialCreate")]
     partial class InitialCreate
     {

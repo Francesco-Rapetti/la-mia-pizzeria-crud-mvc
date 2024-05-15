@@ -3,7 +3,7 @@ using pizzeria_project.Models;
 
 namespace pizzeria_project
 {
-    public class Context : DbContext
+    public class PizzaContext : DbContext
     {
         public DbSet<Pizzeria> Pizzerias { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }

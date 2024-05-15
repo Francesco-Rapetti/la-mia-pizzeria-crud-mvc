@@ -10,7 +10,7 @@ using pizzeria_project;
 
 namespace pizzeriaproject.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(PizzaContext))]
     partial class ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
