@@ -19,8 +19,33 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	</head>
+
 	<body>
-		<h1>HOMEPAGE</h1>
+		<h1 class="text-center mt-4">La mia pizzeria</h1>
+		<div class="d-flex justify-content-center flex-wrap gap-3 my-5">
+		@{
+			if (Pizzeria.Pizzas.Count > 0)
+			{
+				foreach (Pizza pizza in Pizzeria.Pizzas)
+				{
+					<div class="card glass" style="width: 18rem;">
+						<img src="@Url.Content(pizza.Image)" class="card-img-top" alt="...">
+							  <div class="card-body">
+									<h5 class="card-title">@pizza.Name</h5>
+									<p class="card-text">@pizza.Description</p>
+							  </div>
+							  <ul class="list-group list-group-flush fa-ul">
+									<li class="list-group-item bg-transparent"><span class="fa-li"><i class="fa-solid fa-coins"></i></span>@pizza.Price</li>
+							  </ul>
+						</div>
+					}
+				}
+				else
+				{
+					<div class="alert alert-danger">Questo locale non ha nessuna pizza.</div>
+				}
+			}
+		</div>
 
 		<!-- bootstrap js -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script></script>        
