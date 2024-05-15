@@ -1,7 +1,8 @@
-﻿namespace Pizzeria.Models
+﻿namespace pizzeria_project.Models
 {
     public class Pizza
     {
+        public int PizzaId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
