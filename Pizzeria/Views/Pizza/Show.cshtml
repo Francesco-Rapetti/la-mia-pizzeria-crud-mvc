@@ -1,0 +1,36 @@
+﻿@model Pizza
+
+@{
+    ViewData["Title"] = "Show";
+	Layout = "_MyLayout";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-3">Pizza @Model.Name</h1>
+    <hr />
+    <img src="@Url.Content(Model.Image)" class="my-4" style="max-width: 200px;" alt="@Model.Name" />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+    <div>
+        <a asp-action="Index" class="btn btn-outline-dark">Back to List</a> |
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Edit</a> 
+    </div>
+</div>
