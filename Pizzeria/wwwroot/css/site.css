@@ -32,3 +32,13 @@ body {
     backdrop-filter: blur(7.2px);
     -webkit-backdrop-filter: blur(7.2px);
 }
+
+.card.glass {
+    transition: all .3s ease-in-out;
+}
+
+    .card.glass:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+        filter: drop-shadow(16px 16px 20px red);
+    }
