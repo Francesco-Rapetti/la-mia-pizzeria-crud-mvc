@@ -31,6 +31,7 @@
     </dl>
     <div>
         <a asp-action="Index" class="btn btn-outline-dark">Back to List</a> |
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Edit</a> 
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark text-warning disabled">Edit</a> |
+		<a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-dark text-danger disabled">Delete</a>
     </div>
 </div>
