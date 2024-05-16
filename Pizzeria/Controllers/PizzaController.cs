@@ -29,5 +29,27 @@ namespace pizzeria_project.Controllers
 			Pizza? pizza = db.Pizzas.Find(id);
 			return View(pizza);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Pizza pizza)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Index", pizza);
+            //}
+
+            using PizzaContext db = new();
+            Pizza newPizza = new(pizza.Name, pizza.Description, pizza.Price);
+            db.Pizzas.Add(newPizza);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
