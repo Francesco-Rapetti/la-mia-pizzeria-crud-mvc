@@ -29,7 +29,7 @@
                         </li>
                     </ul>
                     <div>
-						<a class="btn btn-outline-light" href="@Url.Action("Create", "Pizza")"><i class="fa-solid fa-plus"></i> New Pizza</a>
+						<a class="btn btn-outline-light @(ViewContext.HttpContext.Request.Path == "/Pizza/Create" ? "disabled" : "")" href="@Url.Action("Create", "Pizza")"><i class="fa-solid fa-plus"></i> New Pizza</a>
                     </div>
                 </div>
             </div>
