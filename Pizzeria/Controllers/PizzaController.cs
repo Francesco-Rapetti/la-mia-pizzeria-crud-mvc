@@ -34,13 +34,15 @@ namespace pizzeria_project.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Pizza pizza)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("Index", pizza);
-            //}
+            pizza.Price = double.TryParse(pizza.Price.ToString(), out double price) ? price : 0;
+            
+            if (!ModelState.IsValid)
+            {
+                return View("Create", pizza);
+            }
 
-            using PizzaContext db = new();
             Pizza newPizza = new(pizza.Name, pizza.Description, pizza.Price);
+            using PizzaContext db = new();
             db.Pizzas.Add(newPizza);
             db.SaveChanges();
             return RedirectToAction("Index");
