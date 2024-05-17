@@ -53,5 +53,45 @@ namespace pizzeria_project.Controllers
         {
             return View();
         }
+
+        public IActionResult Delete(int id)
+        {
+            using PizzaContext db = new();
+            Pizza? pizza = db.Pizzas.Find(id);
+            if (pizza == null)
+            {
+                return NotFound();
+            }
+            db.Pizzas.Remove(pizza);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            using PizzaContext db = new();
+            Pizza? pizza = db.Pizzas.Find(id);
+            if (pizza == null)
+            {
+                return NotFound();
+            }
+            return View(pizza);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Pizza pizza)
+        {
+            pizza.Price = double.TryParse(pizza.Price.ToString(), out double price) ? price : 0;
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", pizza);
+            }
+            //Pizza newPizza = new(pizza.Name, pizza.Description, pizza.Price);
+            using PizzaContext db = new();
+            db.Pizzas.Update(pizza);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
