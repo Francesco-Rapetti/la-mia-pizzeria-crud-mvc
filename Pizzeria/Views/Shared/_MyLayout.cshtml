@@ -28,7 +28,10 @@
                             <a class="nav-link @(ViewContext.HttpContext.Request.Path == "/Pizza" ? "active" : "")" href="@Url.Action("Index", "Pizza")">Pizzas</a>
                         </li>
                     </ul>
-                    <div>
+                    <div class="d-flex gap-2">
+
+                        <!-- Debug button -->
+                        <a class="btn btn-outline-warning" href="@Url.Action("Seed", "Pizza")"><i class="fa-solid fa-bug"></i> Seed DB</a>
 						<a class="btn btn-outline-light @(ViewContext.HttpContext.Request.Path == "/Pizza/Create" ? "disabled" : "")" href="@Url.Action("Create", "Pizza")"><i class="fa-solid fa-plus"></i> New Pizza</a>
                     </div>
                 </div>
