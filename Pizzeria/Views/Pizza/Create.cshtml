@@ -1,4 +1,4 @@
-﻿@model Pizza
+﻿@model PizzaFormModel
 
 @{
     ViewData["Title"] = "Create";
@@ -24,24 +24,40 @@
                 
             </div>
             <div class="form-group my-3">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Pizza.Name" class="control-label"></label>
+                <input asp-for="Pizza.Name" class="form-control" />
+                <span asp-validation-for="Pizza.Name" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Pizza.Description" class="control-label"></label>
+                <textarea asp-for="Pizza.Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Pizza.Description" class="text-danger"></span>
             </div>
             <div class="form-group d-none">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" value="https://via.placeholder.com/150" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label asp-for="Pizza.Image" class="control-label"></label>
+                <input asp-for="Pizza.Image" value="https://via.placeholder.com/150" class="form-control" />
+                <span asp-validation-for="Pizza.Image" class="text-danger"></span>
             </div>
-            <div class="form-group my-3">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control w-25" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="d-flex gap-3">
+                <div class="form-group my-3 w-25">
+                    <label asp-for="Pizza.Price" class="control-label"></label>
+                    <input asp-for="Pizza.Price" class="form-control" />
+                    <span asp-validation-for="Pizza.Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group my-3 w-25">
+                    <label asp-for="Pizza.CategoryId" class="control-label"></label>
+                    <select asp-for="Pizza.CategoryId" class="form-select" aria-label="Category">
+                        <option selected>Select a category</option>
+                        @{
+							foreach (var category in @Model.Categories ?? new List<Category>())
+							{
+								<option value="@category.Id">@category.Name</option>
+							}
+                        }
+                    </select>
+					<span asp-validation-for="Pizza.CategoryId" class="text-danger"></span>
+				</div>
             </div>
             <div class="d-flex gap-3 align-content-center my-3">
                 <div>
