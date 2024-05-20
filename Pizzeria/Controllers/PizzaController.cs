@@ -49,7 +49,7 @@ namespace pizzeria_project.Controllers
         public IActionResult Show(int id)
         {
 			using PizzaContext db = new();
-			Pizza? pizza = db.Pizzas.Find(id);
+			Pizza? pizza = db.Pizzas.Include(p => p.Category).Where(p => p.Id == id).FirstOrDefault();
 			return View(pizza);
         }
 
