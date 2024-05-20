@@ -28,17 +28,24 @@ namespace pizzeria_project.Models
         [Display(Name = "Pizza Price")]
         public double Price { get; set; }
 
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
         public Pizza()
         {
 
         }
 
-        public Pizza(string name, string description, double price, string image = "/img/pizza-placeholder.png")
+        public Pizza(string name, string description, double price, int? categoryId, string image = "/img/pizza-placeholder.png")
         {
             this.Name = name;
             this.Description = description;
             this.Image = image;
+            using (PizzaContext db = new PizzaContext())
+            this.CategoryId = categoryId;
             this.Price = Math.Round(price, 2);
         }
+
+        public string GetCategory() => this.Category?.Name ?? "Unknown";
     }
 }
