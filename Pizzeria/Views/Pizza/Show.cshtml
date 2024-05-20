@@ -32,6 +32,29 @@
     <div>
         <a asp-action="Index" class="btn btn-outline-dark">Back to List</a> |
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark text-warning">Edit</a> |
-		<a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-dark text-danger">Delete</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete
+        </button>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content glass-modal">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">WARNING</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete @Model.Name ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
     </div>
 </div>
