@@ -28,6 +28,7 @@ namespace pizzeria_project.Models
         [Display(Name = "Pizza Price")]
         public double Price { get; set; }
 
+        [Display(Name = "Pizza Category")]
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
@@ -45,7 +46,5 @@ namespace pizzeria_project.Models
             this.CategoryId = categoryId;
             this.Price = Math.Round(price, 2);
         }
-
-        public string GetCategory() => this.Category?.Name ?? "Unknown";
     }
 }
