@@ -16,9 +16,9 @@ namespace pizzeria_project.Validations
                 return new ValidationResult("Invalid price format");
             }
 
-            if (price < 0)
+            if (price <= 0)
             {
-                return new ValidationResult("Price cannot be negative");
+                return new ValidationResult("Price cannot be negative or zero");
             }
 
             if (price > 1000)
