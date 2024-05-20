@@ -37,8 +37,16 @@ body {
     transition: all .3s ease-in-out;
 }
 
-    .card.glass:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-        filter: drop-shadow(16px 16px 20px red);
-    }
+.card.glass:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    filter: drop-shadow(16px 16px 20px red);
+}
+
+.glass-modal {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.2px);
+    -webkit-backdrop-filter: blur(7.2px);
+    color: white;
+}
