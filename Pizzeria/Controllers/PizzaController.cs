@@ -186,7 +186,7 @@ namespace pizzeria_project.Controllers
         public IActionResult Edit(int id)
         {
             using PizzaContext db = new();
-            Pizza? pizza = db.Pizzas.Find(id);
+            Pizza? pizza = db.Pizzas.Where(p => p.Id == id).Include(p => p.Ingredients).Include(p => p.Category).FirstOrDefault();
             if (pizza == null)
             {
                 return NotFound();
@@ -194,23 +194,40 @@ namespace pizzeria_project.Controllers
             PizzaFormModel model = new();
             model.Pizza = pizza;
             model.Categories = db.Categories.ToList();
+            model.Ingredients = db.Ingredients.ToList();
+            model.SelectedIngredientsIds = pizza.Ingredients?.Select(i => i.Id).ToList();
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Pizza pizza)
+        public IActionResult Edit(int id, PizzaFormModel data)
         {
             if (!ModelState.IsValid)
             {
                 using PizzaContext db1 = new();
                 PizzaFormModel model = new();
-                model.Pizza = pizza;
+                model.Pizza = data.Pizza;
                 model.Categories = db1.Categories.ToList();
+                model.Ingredients = db1.Ingredients.ToList();
+                model.SelectedIngredientsIds = data.SelectedIngredientsIds;
                 return View(model);
             }
             using PizzaContext db = new();
-            db.Pizzas.Update(pizza);
+            Pizza pizza = db.Pizzas
+                .Include(p => p.Ingredients)
+                .FirstOrDefault(p => p.Id == id);
+
+            pizza.Ingredients.Clear();
+            foreach (int ingredientId in data.SelectedIngredientsIds)
+            {
+                pizza.Ingredients.Add(db.Ingredients.Find(ingredientId));
+            }
+            pizza.Name = data.Pizza.Name;
+            pizza.Description = data.Pizza.Description;
+            pizza.Price = data.Pizza.Price;
+            pizza.CategoryId = data.Pizza.CategoryId;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

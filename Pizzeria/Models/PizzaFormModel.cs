@@ -1,10 +1,11 @@
-﻿using pizzeria_project.Validations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using pizzeria_project.Validations;
 
 namespace pizzeria_project.Models
 {
     public class PizzaFormModel
     {
-        public Pizza Pizza { get; set; } = new Pizza();
+        public Pizza? Pizza { get; set; }
         public List<Category>? Categories { get; set; }
         public List<Ingredient>? Ingredients { get; set; }
 

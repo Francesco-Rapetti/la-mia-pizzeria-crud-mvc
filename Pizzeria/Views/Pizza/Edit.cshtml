@@ -1,4 +1,5 @@
-﻿@model PizzaFormModel
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model PizzaFormModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -20,48 +21,65 @@
             </div>
         }
         <form asp-action="Edit">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger">
             </div>
-            <div class="form-group d-none">
-                <input asp-for="Pizza.Id" value="@Model.Pizza.Id" class="form-control" />
-            </div>
-            <div class="form-group my-3">
+            <div class="form-floating my-3">
+                <input asp-for="Pizza.Name" placeholder="Name" class="form-control @(ViewData.ModelState.IsValid ? "" : (ViewData.ModelState["Pizza.Name"]?.ValidationState == ModelValidationState.Valid ? "is-valid" : "is-invalid"))" />
                 <label asp-for="Pizza.Name" class="control-label"></label>
-                <input asp-for="Pizza.Name" class="form-control" />
                 <span asp-validation-for="Pizza.Name" class="text-danger"></span>
             </div>
-            <div class="form-group my-3">
+            <div class="form-floating my-3">
+                <textarea asp-for="Pizza.Description" style="height: 150px" placeholder="Description" class="form-control @(ViewData.ModelState.IsValid ? "" : (ViewData.ModelState["Pizza.Description"]?.ValidationState == ModelValidationState.Valid ? "is-valid" : "is-invalid"))"></textarea>
                 <label asp-for="Pizza.Description" class="control-label"></label>
-                <textarea asp-for="Pizza.Description" class="form-control" rows="4"></textarea>
                 <span asp-validation-for="Pizza.Description" class="text-danger"></span>
             </div>
             <div class="form-group d-none">
                 <label asp-for="Pizza.Image" class="control-label"></label>
-                <input asp-for="Pizza.Image" value="@Model.Pizza.Image" class="form-control" />
+                <input asp-for="Pizza.Image" value="https://via.placeholder.com/150" class="form-control @(ViewData.ModelState.IsValid ? "" : (ViewData.ModelState["Pizza.Image"]?.ValidationState == ModelValidationState.Valid ? "is-valid" : "is-invalid"))" />
                 <span asp-validation-for="Pizza.Image" class="text-danger"></span>
             </div>
-            <div class="d-flex gap-3">
-                <div class="form-group my-3 w-25">
-                    <label asp-for="Pizza.Price" class="control-label"></label>
-                    <input asp-for="Pizza.Price" class="form-control" />
-                    <span asp-validation-for="Pizza.Price" class="text-danger"></span>
+            <div class="row">
+                <div class="col-6 col-lg-4">
+                    <div class="form-floating my-3">
+                        <input asp-for="Pizza.Price" placeholder="Price" value="@(Model.Pizza.Price == 0 ? "" : Model.Pizza.Price)" class="form-control @(ViewData.ModelState.IsValid ? "" : (ViewData.ModelState["Pizza.Price"]?.ValidationState == ModelValidationState.Valid ? "is-valid" : "is-invalid"))" />
+                        <label asp-for="Pizza.Price" class="control-label"></label>
+                        <span asp-validation-for="Pizza.Price" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group my-3 w-25">
-                    <label asp-for="Pizza.CategoryId" class="control-label"></label>
-                    <select asp-for="Pizza.CategoryId" class="form-select" aria-label="Category">
-                        <option selected>Select a category</option>
-                        @{
-                            foreach (var category in @Model.Categories ?? new List<Category>())
-                            {
-                                <option value="@category.Id">@category.Name</option>
+                <div class="col-6 col-lg-4">
+                    <div class="form-floating my-3">
+                        <select asp-for="Pizza.CategoryId" class="form-select @(ViewData.ModelState.IsValid ? "" : (ViewData.ModelState["Pizza.CategoryId"]?.ValidationState == ModelValidationState.Valid ? "is-valid" : "is-invalid"))" aria-label="Category">
+                            <option selected>Select a category</option>
+                            @{
+                                foreach (var category in @Model.Categories ?? new List<Category>())
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
                             }
-                        }
-                    </select>
-                    <span asp-validation-for="Pizza.CategoryId" class="text-danger"></span>
+                        </select>
+                        <label asp-for="Pizza.CategoryId" class="control-label"></label>
+                        <span asp-validation-for="Pizza.CategoryId" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
-            <div class="d-flex gap-3 align-content-center my-3">
+
+            <div class="form-group my-3 container">
+                <div class="row">
+                    @for (int i = 0; i < Model.Ingredients?.Count; i++)
+                    {
+                        <div class="col-4">
+                            <input type="checkbox" name="SelectedIngredientsIds" class="form-check-input @(ViewData.ModelState.IsValid ? "" : (ViewData.ModelState["SelectedIngredientsIds"]?.ValidationState == ModelValidationState.Valid ? "is-valid" : "is-invalid"))" value="@Model.Ingredients[i].Id"
+                            @(Model.SelectedIngredientsIds.Contains(Model.Ingredients[i].Id) ? "checked" : "") />
+                            <label class="form-check-label" for="SelectedIngredientsIds">@Model.Ingredients[i].Name</label>
+                        </div>
+                    }
+                </div>
+                <span asp-validation-for="SelectedIngredientsIds" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-3 align-content-center mt-3">
                 <div>
                     <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
                 </div>

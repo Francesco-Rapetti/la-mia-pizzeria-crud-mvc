@@ -33,7 +33,7 @@ namespace pizzeria_project.Models
         public Category? Category { get; set; }
 
         [Display(Name = "Pizza Ingredients")]
-        public List<Ingredient>? Ingredients { get; set; }
+        public List<Ingredient>? Ingredients { get; set; } = new List<Ingredient>();
 
         public Pizza()
         {
@@ -47,7 +47,6 @@ namespace pizzeria_project.Models
             this.Image = image;
             this.CategoryId = categoryId;
             this.Price = Math.Round(price, 2);
-            this.Ingredients = new List<Ingredient>();
         }
     }
 }
