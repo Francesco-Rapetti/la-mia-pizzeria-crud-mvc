@@ -16,10 +16,15 @@
 				<div class="card glass h-100" style="width: 18rem;">
 					<img src="@Url.Content(pizza.Image)" class="card-img-top" alt="...">
 					<div class="card-body">
-						<div class="d-flex align-items-center gap-2 mb-3">
-							<h5 class="card-title m-0">@pizza.Name</h5>
-							<span class="badge rounded-pill @("text-bg-" + (pizza.Category?.Color ?? "secondary d-none"))">@(pizza.Category?.Name ?? "")</span>
+						<h5 class="card-title">@pizza.Name <span class="badge @("text-bg-" + (pizza.Category?.Color ?? "secondary d-none"))">@(pizza.Category?.Name ?? "")</span></h5>
+
+						<div class="d-flex gap-1 mt-3 mb-2 flex-wrap">
+								@foreach (Ingredient ingredient in pizza.Ingredients?.ToList() ?? new List<Ingredient>())
+								{
+									<span class="badge rounded-pill bg-secondary">@ingredient.Name</span>
+								}
 						</div>
+
 						<p class="card-text">@pizza.Description</p>
 					</div>
 					<ul class="list-group list-group-flush fa-ul">
