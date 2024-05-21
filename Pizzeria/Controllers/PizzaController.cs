@@ -135,19 +135,25 @@ namespace pizzeria_project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza pizza)
+        public IActionResult Create(PizzaFormModel data)
         {
             if (!ModelState.IsValid)
             {
                 using PizzaContext db1 = new();
-                PizzaFormModel model = new();
-                model.Pizza = pizza;
-                model.Categories = db1.Categories.ToList();
-                return View(model);
+                //PizzaFormModel model = new();
+                //model.Pizza = data.Pizza;
+                data.Categories = db1.Categories.ToList();
+                data.Ingredients = db1.Ingredients.ToList();
+                //model.SelectedIngredients = pizza.Ingredients?.ToList();
+                return View(data);
             }
 
-            Pizza newPizza = new(pizza.Name, pizza.Description, pizza.Price, pizza.CategoryId);
+            Pizza newPizza = new(data.Pizza.Name, data.Pizza.Description, data.Pizza.Price, data.Pizza.CategoryId);
             using PizzaContext db = new();
+            foreach (int ingredientId in data.SelectedIngredientsIds)
+            {
+                newPizza.Ingredients?.Add(db.Ingredients.Find(ingredientId));
+            }
             db.Pizzas.Add(newPizza);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -160,6 +166,7 @@ namespace pizzeria_project.Controllers
             PizzaFormModel model = new();
             model.Pizza = new();
             model.Categories = db.Categories.ToList();
+            model.Ingredients = db.Ingredients.ToList();
             return View(model);
         }
 
