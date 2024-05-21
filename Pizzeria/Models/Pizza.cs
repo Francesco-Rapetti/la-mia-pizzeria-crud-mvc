@@ -32,6 +32,8 @@ namespace pizzeria_project.Models
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
+        public List<Ingredient>? Ingredients { get; set; }
+
         public Pizza()
         {
 
@@ -42,9 +44,9 @@ namespace pizzeria_project.Models
             this.Name = name;
             this.Description = description;
             this.Image = image;
-            using (PizzaContext db = new PizzaContext())
             this.CategoryId = categoryId;
             this.Price = Math.Round(price, 2);
+            this.Ingredients = new List<Ingredient>();
         }
     }
 }
