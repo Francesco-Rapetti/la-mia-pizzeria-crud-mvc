@@ -20,7 +20,7 @@
             @Html.DisplayNameFor(model => model.CategoryId)
         </dt>
         <dd class="col-sm-10">
-            <span class="badge rounded-pill @("text-bg-" + (Model.Category?.Color ?? "secondary d-none"))">@(Model.Category?.Name ?? "")</span>
+            <span class="badge @("text-bg-" + (Model.Category?.Color ?? "secondary d-none"))">@(Model.Category?.Name ?? "")</span>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
