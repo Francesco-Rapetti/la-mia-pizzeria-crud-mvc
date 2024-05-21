@@ -32,6 +32,7 @@ namespace pizzeria_project.Models
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
+        [Display(Name = "Pizza Ingredients")]
         public List<Ingredient>? Ingredients { get; set; }
 
         public Pizza()
