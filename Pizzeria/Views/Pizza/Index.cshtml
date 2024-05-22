@@ -40,3 +40,7 @@
 	}
 }
 </div>
+<div class="position-sticky p-3 bottom-0 d-flex justify-content-end">
+	<a class="btn btn-outline-light glass-dark rounded-4 border-0 fs-2 d-flex align-items-center justify-content-center @(ViewContext.HttpContext.Request.Path == "/Pizza/Create" ? "disabled" : "")" style="width: 4.5rem; height: 4.5rem" href="@Url.Action("Create", "Pizza")"><i class="fa-solid fa-plus"></i></a>
+</div>
+
