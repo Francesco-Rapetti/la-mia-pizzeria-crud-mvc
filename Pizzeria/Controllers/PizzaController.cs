@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using pizzeria_project.Models;
 
@@ -116,9 +117,11 @@ namespace pizzeria_project.Controllers
 
             }
 
+
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN,USER")]
         public IActionResult Index()
         {
             using PizzaContext db = new();
@@ -133,6 +136,7 @@ namespace pizzeria_project.Controllers
 			return View(pizza);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PizzaFormModel data)
@@ -159,6 +163,7 @@ namespace pizzeria_project.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -170,6 +175,7 @@ namespace pizzeria_project.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Delete(int id)
         {
             using PizzaContext db = new();
@@ -183,6 +189,7 @@ namespace pizzeria_project.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Edit(int id)
         {
             using PizzaContext db = new();
@@ -199,6 +206,7 @@ namespace pizzeria_project.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, PizzaFormModel data)
